@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myasar@student.42kocaeli.com.tr <myasar    +#+  +:+       +#+        */
+/*   By: myasar <myasar@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 00:00:29 by myasar@stud       #+#    #+#             */
-/*   Updated: 2022/12/14 00:00:48 by myasar@stud      ###   ########.fr       */
+/*   Created: 2023/01/12 20:15:25 by myasar            #+#    #+#             */
+/*   Updated: 2023/01/12 20:18:51 by myasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include	"libft.h"
 
-char    *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-    return(ft_memchr(s, c, ft_strlen(s) + 1));
+	int	s_len;
+
+	s_len = ft_strlen(s);
+	while (s_len >= 0)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+		s_len--;
+	}
+	return (NULL);
 }

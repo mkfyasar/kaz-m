@@ -3,30 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myasar@student.42kocaeli.com.tr <myasar    +#+  +:+       +#+        */
+/*   By: myasar <myasar@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 00:20:35 by myasar@stud       #+#    #+#             */
-/*   Updated: 2022/12/14 00:20:36 by myasar@stud      ###   ########.fr       */
+/*   Created: 2022/12/28 12:00:01 by myasar            #+#    #+#             */
+/*   Updated: 2022/12/28 12:00:01 by myasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    unsigned char   *str1;
-    unsigned char   *str2;
-    size_t  i;
+	const unsigned char	*s1_uc;
+	const unsigned char	*s2_uc;
+	size_t				index;
 
-    i = 0;
-    str1 = (unsigned char *)s1;
-    str2 = (unsigned char *)s2;
-    while (i < n)
-    {
-        if (str1[i] != str2[i])
-            return (str1[i] - str2[i]);
-        i++;
-
-    }
-    return (0);
+	index = 0;
+	s1_uc = (const unsigned char *)s1;
+	s2_uc = (const unsigned char *)s2;
+	while (index < n)
+	{
+		if (s1_uc[index] != s2_uc[index])
+			return (s1_uc[index] - s2_uc[index]);
+		index++;
+	}
+	return (0);
 }

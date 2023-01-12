@@ -1,32 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myasar <myasar@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/28 12:00:59 by myasar            #+#    #+#             */
+/*   Updated: 2022/12/28 12:00:59 by myasar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static int
-	ft_abs(int nbr)
+void	ft_putnbr_fd(int n, int fd)
 {
-	return ((nbr < 0) ? -nbr : nbr);
-}
+	long	nb;
 
-void
-	ft_putnbr_fd(int n, int fd)
-{
-	char	str[13];
-	int		is_neg;
-	int		length;
-
-	is_neg = (n < 0);
-	ft_bzero(str, 13);
-	if (n == 0)
-		str[0] = '0';
-	length = 0;
-	while (n != 0)
+	nb = n;
+	if (nb < 0)
 	{
-		str[length++] = '0' + ft_abs(n % 10);
-		n = (n / 10);
+		ft_putchar_fd('-', fd);
+		nb = (nb * -1);
 	}
-	if (is_neg)
-		str[length] = '-';
-	else if (length > 0)
-		length--;
-	while (length >= 0)
-		write(fd, &str[length--], 1);
+	if (nb < 10)
+		ft_putchar_fd(nb + 48, fd);
+	if (nb > 9)
+	{
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
+	}
 }

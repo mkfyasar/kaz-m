@@ -3,37 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myasar@student.42kocaeli.com.tr <myasar    +#+  +:+       +#+        */
+/*   By: myasar <myasar@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 00:35:41 by myasar@stud       #+#    #+#             */
-/*   Updated: 2022/12/10 20:19:10 by myasar@stud      ###   ########.fr       */
+/*   Created: 2022/12/28 12:00:33 by myasar            #+#    #+#             */
+/*   Updated: 2023/01/12 21:09:55 by myasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
-void
-        *ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *b, int c, size_t len)
 {
-        size_t                  i;
+	size_t	i;
 
-        if (!b)
-                return (NULL);
-        i = 0;
-        while (i < len)
-        {
-                *(unsigned char*)(b + i) = (unsigned char)c;
-                i++;
-        }
-        return(b);
+	i = 0;
+	while (i < len)
+	{
+		((unsigned char *)b)[i] = c;
+		i++;
+	}
+	return (b);
 }
-
 /*
+#include <stdio.h>
 int main()
 {
-        int str[] = "Akif";
-        ft_memset(str, 'a', 3);
-        printf("%s",str);
+	char a[] = "akif";
+	
+	printf("%s",ft_memset(a,'l',2));
 }
 */

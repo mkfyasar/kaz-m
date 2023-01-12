@@ -3,71 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myasar@student.42kocaeli.com.tr <myasar    +#+  +:+       +#+        */
+/*   By: myasar <myasar@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 19:09:46 by myasar@stud       #+#    #+#             */
-/*   Updated: 2022/12/16 19:28:26 by myasar@stud      ###   ########.fr       */
+/*   Created: 2023/01/12 20:15:20 by myasar            #+#    #+#             */
+/*   Updated: 2023/01/12 20:18:48 by myasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_words(char const *s, char c)
+unsigned int	wordcounter(const char *s, char delimiter)
 {
-	int	index;
-	int	count;
+	unsigned int	word;
 
-	index = 0;
-	count = 0;
-	while (s[index])
+	word = 0;
+	while (*s)
 	{
-		if (s[index] == c)
-			index++;
+		if (*s == delimiter)
+			s++;
 		else
 		{
-			count++;
-			while (s[index] && s[index] != c)
-				index++;
+			while (*s != delimiter && *s)
+				s++;
+			word++;
 		}
 	}
-	return (count);
-}
-
-static void	ft_allocate(char **tab, char const *s, char sep)
-{
-	char		**tab_p;
-	char const	*tmp;
-
-	tmp = s;
-	tab_p = tab;
-	while (*tmp)
-	{
-		while (*s == sep)
-			++s;
-		tmp = s;
-		while (*tmp && *tmp != sep)
-			++tmp;
-		if (tmp > s)
-		{
-			*tab_p = ft_substr(s, 0, tmp - s);
-			s = tmp;
-			++tab_p;
-		}
-	}
-	*tab_p = NULL;
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**new;
-	int		size;
+	char			**arr;
+	unsigned int	j;
+	unsigned int	a;
 
 	if (!s)
 		return (NULL);
-	size = ft_count_words(s, c);
-	new = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!new)
+	arr = (char **) ft_calloc(wordcounter(s, c) + 1, sizeof(char *));
+	if (!arr)
 		return (NULL);
-	ft_allocate(new, s, c);
-	return (new);
+	a = 0;
+	while (*s)
+	{
+		if (*s == c)
+			s++;
+		else
+		{
+			j = 0;
+			while (*s != c && *s && ++j)
+				s++;
+			arr[++a -1] = (char *) ft_calloc(j + 1, sizeof(char));
+			ft_strlcpy(arr[a -1], s - j, j + 1);
+		}
+	}
+	return (arr);
 }
+/*
+#include <stdio.h>
+
+int main()
+{
+
+	char x[] = "dans.dans.dans";
+	char y = '.';
+	int i;
+	char **z = ft_split(x,y);
+	i = 0;
+
+	while (i < 3)
+	{
+	printf("%s\n", z[i]);
+	i++;
+	}
+}
+*/

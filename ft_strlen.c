@@ -3,22 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myasar@student.42kocaeli.com.tr <myasar    +#+  +:+       +#+        */
+/*   By: myasar <myasar@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 23:14:04 by myasar@stud       #+#    #+#             */
-/*   Updated: 2022/12/09 00:29:46 by myasar@stud      ###   ########.fr       */
+/*   Created: 2022/12/28 12:02:03 by myasar            #+#    #+#             */
+/*   Updated: 2023/01/12 20:53:00 by myasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t
-ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-    size_t i;
+	size_t	i;
 
-    i = 0;
-    while (s[i])
-        i++;
-    return i;
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
 }
+
+/*
+#include <stdio.h>
+int main()
+{
+	const char *a = "akif";
+	printf("%zu",ft_strlen(a));
+}
+*/

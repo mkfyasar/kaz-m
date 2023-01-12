@@ -1,57 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myasar <myasar@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/28 11:59:46 by myasar            #+#    #+#             */
-/*   Updated: 2022/12/28 11:59:46 by myasar           ###   ########.fr       */
+/*   Created: 2023/01/12 20:14:48 by myasar            #+#    #+#             */
+/*   Updated: 2023/01/12 20:18:27 by myasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_numlen(int num)
+int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
-	if (num == 0)
-		return (1);
 	i = 0;
-	while (num > 0 || num < 0)
+	while (lst != NULL)
 	{
-		num /= 10;
+		lst = lst -> next;
 		i++;
 	}
 	return (i);
 }
 
-char	*ft_itoa(int n)
-{
-	int		len;
-	char	*dizi;
-	long	nbr;
+// #include <stdio.h>
 
-	nbr = n;
-	len = ft_numlen(nbr);
-	if (n < 0)
-	{
-		len++;
-		nbr = -nbr;
-	}
-	dizi = malloc(sizeof(char) * len + 1);
-	if (!dizi)
-		return (NULL);
-	dizi[len] = '\0';
-	while (nbr > 0)
-	{
-		dizi[--len] = nbr % 10 + 48;
-		nbr /= 10;
-	}
-	if (n < 0)
-		dizi[0] = '-';
-	if (n == 0)
-		dizi[0] = '0';
-	return (dizi);
-}
+// int main()
+// {
+// 	t_list *node1,*node2,*node3;
+// 	node1 = (t_list *)malloc(sizeof(t_list));
+// 	node2 = (t_list *)malloc(sizeof(t_list));
+// 	node3 = (t_list *)malloc(sizeof(t_list));
+
+// 	node1->next = node2;
+// 	node2->next = node3;
+// 	node3->next = NULL;
+
+// 	printf("%d",ft_lstsize(node1));
+// }
+
+// Bağlı listenin uzunluğunu döndürür.

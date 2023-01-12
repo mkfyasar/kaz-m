@@ -3,50 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: myasar@student.42kocaeli.com.tr <myasar    +#+  +:+       +#+        */
+/*   By: myasar <myasar@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 19:06:24 by myasar@stud       #+#    #+#             */
-/*   Updated: 2022/12/16 19:08:49 by myasar@stud      ###   ########.fr       */
+/*   Created: 2022/12/28 12:02:34 by myasar            #+#    #+#             */
+/*   Updated: 2022/12/28 12:02:34 by myasar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int
-	ft_char_in_set(char c, char const *set)
+static int	ft_checkset(char c, char const *set)
 {
 	size_t	i;
 
 	i = 0;
 	while (set[i])
 	{
-		if (set[i] == c)
+		if (set[i++] == c)
 			return (1);
-		i++;
 	}
 	return (0);
 }
 
-char
-	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*str;
-	size_t	i;
+	char	*m;
 	size_t	start;
 	size_t	end;
+	size_t	i;
 
+	if (!s1 || !set)
+		return (NULL);
 	start = 0;
-	while (s1[start] && ft_char_in_set(s1[start], set))
-		start++;
 	end = ft_strlen(s1);
-	while (end > start && ft_char_in_set(s1[end - 1], set))
+	while (s1[start] && ft_checkset(s1[start], set))
+		start++;
+	while (end > start && ft_checkset(s1[end - 1], set))
 		end--;
-	str = (char*)malloc(sizeof(*s1) * (end - start + 1));
-	if (!str)
+	m = (char *)malloc(sizeof(char) * (end - start) + 1);
+	if (!m)
 		return (NULL);
 	i = 0;
 	while (start < end)
-		str[i++] = s1[start++];
-	str[i] = 0;
-	return (str);
+		m[i++] = s1[start++];
+	m[i] = '\0';
+	return (m);
 }
